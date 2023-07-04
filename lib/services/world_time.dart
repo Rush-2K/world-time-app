@@ -12,19 +12,26 @@ class WorldTime {
 
   Future<void> getTime() async {
 
-    Response response = await get(Uri.parse('https://timeapi.io/api/Time/current/zone?timeZone=$url'));
-    Map data = jsonDecode(response.body);//convert json string to a Json object so that can easily access the data
-    // print(data['dateTime']);
+    try {
+      Response response = await get(Uri.parse('https://timeapi.io/api/Time/current/zone?timeZone=$url'));
+      Map data = jsonDecode(response.body);//convert json string to a Json object so that can easily access the data
+      // print(data['dateTime']);
 
-    //get properties of data
-    String datetime = data['dateTime'];
-    // print(datetime);
+      //get properties of data
+      String datetime = data['dateTime'];
+      // print(datetime);
 
-    //create DateTime object
-    DateTime now = DateTime.parse(datetime.substring(0,26));
+      //create DateTime object
+      DateTime now = DateTime.parse(datetime.substring(0,26));
 
-    // set the time property
-    time = now.toString();
+      // set the time property
+      time = now.toString();
+    }
+    catch (e) {
+      print('caught error: $e');
+      time = 'could not get time data';
+
+    }
 
   }
 
