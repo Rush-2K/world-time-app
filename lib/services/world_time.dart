@@ -35,9 +35,6 @@ class WorldTime {
       time = 'could not get time data';
 
     }
-
-
-
   }
 
 }
